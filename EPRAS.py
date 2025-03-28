@@ -4,11 +4,6 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import pandas as pd
 import time
-
-# ============================
-# Page Replacement Algorithms
-# ============================
-
 def fifo_algorithm(pages, frames):
     memory = []
     page_faults = 0
@@ -23,7 +18,6 @@ def fifo_algorithm(pages, frames):
             page_faults += 1
         steps.append(memory.copy())
     return page_faults, steps
-
 def lru_algorithm(pages, frames):
     memory = []
     page_faults = 0
@@ -69,21 +63,13 @@ def optimal_algorithm(pages, frames):
             page_faults += 1
         steps.append(memory.copy())
     return page_faults, steps
-
-# =======================
-# Advanced Simulator App
-# =======================
-
 class PageReplacementSimulatorApp:
     def __init__(self, root):
         self.root = root
         self.root.title("Ultimate Page Replacement Simulator")
         self.root.geometry("1000x700")
-        self.current_theme = "dark"  # default theme
-
-        # Set initial colors for dark mode
+        self.current_theme = "dark"
         self.set_theme_colors()
-
         self.create_menu()
         self.create_widgets()
         self.create_treeview()
