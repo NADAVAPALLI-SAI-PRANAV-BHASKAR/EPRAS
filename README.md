@@ -58,14 +58,14 @@ FIFO Page Faults: 9
 LRU Page Faults: 7
 Optimal Page Faults: 5
 ```
-📊 **A graph comparing page faults** will be displayed automatically.  
+**A graph comparing page faults** will be displayed automatically.  
 
 ---
 
 ## **Future Enhancements**  
-🚀 Add **LFU, Clock, and Second-Chance** algorithms  
-🚀 Develop a **GUI-based simulator** using Tkinter  
-🚀 Convert it into a **web-based tool**  
+Add **LFU, Clock, and Second-Chance** algorithms  
+Develop a **GUI-based simulator** using Tkinter  
+Convert it into a **web-based tool**  
 
 ---
 
@@ -80,11 +80,11 @@ Contributions are welcome!
 ---
 
 ## **License**  
-📜 MIT License – Free to modify and distribute.  
+MIT License – Free to modify and distribute.  
 
 ---
 
 ## **Contact & Support**  
-💡 Found a bug? Open an issue or contact **your.email@example.com**  
+Found a bug? Open an issue or contact **pranav95515@gmail.com**  
 
-🌟 If you like this project, consider **starring ⭐ it on GitHub!** 🚀
+If you like this project, consider **starring it on GitHub!**
