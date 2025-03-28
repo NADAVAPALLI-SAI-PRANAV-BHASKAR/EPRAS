@@ -49,7 +49,6 @@ def optimal_algorithm(pages, frames):
             if len(memory) < frames:
                 memory.append(page)
             else:
-                # find the page in memory that won't be used for the longest time
                 future = pages[i+1:]
                 index_dict = {}
                 for mem_page in memory:
