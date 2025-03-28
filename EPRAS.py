@@ -57,7 +57,6 @@ def optimal_algorithm(pages, frames):
                         index_dict[mem_page] = future.index(mem_page)
                     else:
                         index_dict[mem_page] = float('inf')
-                # choose page with the maximum index (or never used)
                 page_to_replace = max(index_dict, key=index_dict.get)
                 memory[memory.index(page_to_replace)] = page
             page_faults += 1
