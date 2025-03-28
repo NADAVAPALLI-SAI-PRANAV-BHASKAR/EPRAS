@@ -206,9 +206,7 @@ class PageReplacementSimulatorApp:
         self.ax.set_ylabel("Faults", color=self.fg_color)
         self.ax.set_facecolor(self.entry_bg)
         self.canvas.draw()
-
     def animate_steps(self, steps):
-        # Optional: animate steps in the Treeview (highlight each row briefly)
         for item in self.tree.get_children():
             self.tree.item(item, tags=("normal",))
         self.tree.tag_configure("highlight", background="#F1C40F")
@@ -217,10 +215,7 @@ class PageReplacementSimulatorApp:
             self.root.update_idletasks()
             time.sleep(0.3)
             self.tree.item(item, tags=("normal",))
-        # End of animation
-
     def export_csv(self):
-        # Export the simulation steps to a CSV file using pandas
         rows = []
         for child in self.tree.get_children():
             step, memory = self.tree.item(child)["values"]
@@ -230,18 +225,12 @@ class PageReplacementSimulatorApp:
         if file_path:
             df.to_csv(file_path, index=False)
             messagebox.showinfo("Export", "Simulation steps exported successfully!")
-
     def toggle_theme(self):
-        # Toggle between dark and light mode
         self.current_theme = "light" if self.current_theme == "dark" else "dark"
         self.set_theme_colors()
-        # Update widget colors
         self.root.configure(bg=self.bg_color)
         self.faults_label.config(bg=self.bg_color, fg=self.fg_color)
-        # Update input frame colors (for simplicity, recreate UI elements or update individually)
-        # (In a real app, you would loop through and update each widget's colors)
         messagebox.showinfo("Theme", f"Switched to {self.current_theme} mode. Restart the app to see full effect.")
-
     def show_manual(self):
         manual_text = (
             "Ultimate Page Replacement Simulator - User Manual:\n\n"
@@ -255,7 +244,6 @@ class PageReplacementSimulatorApp:
             "8. Toggle Dark/Light Mode from the Theme menu.\n"
         )
         messagebox.showinfo("User Manual", manual_text)
-
 if __name__ == "__main__":
     root = tk.Tk()
     app = PageReplacementSimulatorApp(root)
