@@ -39,7 +39,6 @@ def lru_algorithm(pages, frames):
             recent_usage.append(page)
         steps.append(memory.copy())
     return page_faults, steps
-
 def optimal_algorithm(pages, frames):
     memory = []
     page_faults = 0
@@ -72,7 +71,6 @@ class PageReplacementSimulatorApp:
         self.create_widgets()
         self.create_treeview()
         self.create_chart_area()
-
     def set_theme_colors(self):
         if self.current_theme == "dark":
             self.bg_color = "#2C3E50"
@@ -87,20 +85,16 @@ class PageReplacementSimulatorApp:
             self.btn_bg = "#2980B9"
             self.btn_fg = "white"
         self.root.configure(bg=self.bg_color)
-
     def create_menu(self):
         menubar = tk.Menu(self.root)
         self.root.config(menu=menubar)
-
         help_menu = tk.Menu(menubar, tearoff=0)
         help_menu.add_command(label="User Manual", command=self.show_manual)
         help_menu.add_command(label="About", command=lambda: messagebox.showinfo("About", "Ultimate Page Replacement Simulator\nDeveloped to stand out!"))
         menubar.add_cascade(label="Help", menu=help_menu)
-
         theme_menu = tk.Menu(menubar, tearoff=0)
         theme_menu.add_command(label="Toggle Dark/Light Mode", command=self.toggle_theme)
         menubar.add_cascade(label="Theme", menu=theme_menu)
-
     def create_widgets(self):
         input_frame = tk.Frame(self.root, bg=self.bg_color, pady=10)
         input_frame.pack(fill=tk.X)
