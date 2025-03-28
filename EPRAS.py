@@ -104,74 +104,52 @@ class PageReplacementSimulatorApp:
     def create_widgets(self):
         input_frame = tk.Frame(self.root, bg=self.bg_color, pady=10)
         input_frame.pack(fill=tk.X)
-
-        # Pages input
         tk.Label(input_frame, text="Pages (space-separated):", bg=self.bg_color, fg=self.fg_color, font=("Arial", 12)).grid(row=0, column=0, padx=10, pady=5, sticky="w")
         self.pages_entry = tk.Entry(input_frame, width=40, font=("Arial", 12), bg=self.entry_bg, fg=self.fg_color)
         self.pages_entry.grid(row=0, column=1, padx=10, pady=5)
         self.pages_entry.insert(0, "7 0 1 2 0 3 4 2 3 0 3 2")
-
-        # Frames input
         tk.Label(input_frame, text="Frames:", bg=self.bg_color, fg=self.fg_color, font=("Arial", 12)).grid(row=0, column=2, padx=10, pady=5, sticky="w")
         self.frames_entry = tk.Entry(input_frame, width=5, font=("Arial", 12), bg=self.entry_bg, fg=self.fg_color)
         self.frames_entry.grid(row=0, column=3, padx=10, pady=5)
         self.frames_entry.insert(0, "3")
-
-        # Algorithm dropdown
         tk.Label(input_frame, text="Algorithm:", bg=self.bg_color, fg=self.fg_color, font=("Arial", 12)).grid(row=0, column=4, padx=10, pady=5, sticky="w")
         self.algorithm_choice = ttk.Combobox(input_frame, values=["FIFO", "LRU", "Optimal"], state="readonly", font=("Arial", 12))
         self.algorithm_choice.grid(row=0, column=5, padx=10, pady=5)
         self.algorithm_choice.current(0)
-
-        # Simulate Button
         self.simulate_btn = tk.Button(input_frame, text="Simulate", font=("Arial", 12, "bold"), bg=self.btn_bg, fg=self.btn_fg, command=self.simulate)
         self.simulate_btn.grid(row=0, column=6, padx=10, pady=5)
-
-        # Export Button
         self.export_btn = tk.Button(input_frame, text="Export CSV", font=("Arial", 12, "bold"), bg="#27AE60", fg="white", command=self.export_csv)
         self.export_btn.grid(row=0, column=7, padx=10, pady=5)
-
-        # Total faults label
         self.faults_label = tk.Label(self.root, text="Total Page Faults: 0", bg=self.bg_color, fg=self.fg_color, font=("Arial", 14, "bold"))
         self.faults_label.pack(pady=10)
-
     def create_treeview(self):
-        # Frame for simulation steps table
         table_frame = tk.Frame(self.root, bg=self.bg_color)
         table_frame.pack(pady=10, fill=tk.BOTH, expand=True)
-
         self.tree = ttk.Treeview(table_frame, columns=("Step", "Memory Frames"), show="headings", height=8)
         self.tree.heading("Step", text="Step")
         self.tree.heading("Memory Frames", text="Memory Frames")
         self.tree.column("Step", width=80, anchor="center")
         self.tree.column("Memory Frames", width=400, anchor="w")
         self.tree.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
-
         scrollbar = ttk.Scrollbar(table_frame, orient="vertical", command=self.tree.yview)
         self.tree.configure(yscroll=scrollbar.set)
         scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
-
     def create_chart_area(self):
-        # Frame for matplotlib chart
         chart_frame = tk.Frame(self.root, bg=self.bg_color)
         chart_frame.pack(pady=10, fill=tk.BOTH, expand=True)
-
         self.fig, self.ax = plt.subplots(figsize=(6, 3), facecolor=self.bg_color)
         self.ax.set_title("Page Faults", color=self.fg_color)
         self.ax.set_ylabel("Faults", color=self.fg_color)
         self.ax.set_facecolor(self.entry_bg)
         self.canvas = FigureCanvasTkAgg(self.fig, master=chart_frame)
         self.canvas.get_tk_widget().pack(fill=tk.BOTH, expand=True)
-
     def simulate(self):
         try:
             pages = list(map(int, self.pages_entry.get().split()))
             frames = int(self.frames_entry.get())
             algorithm = self.algorithm_choice.get()
-
             if frames <= 0 or not pages:
                 raise ValueError("Invalid input!")
-
             if algorithm == "FIFO":
                 faults, steps = fifo_algorithm(pages, frames)
             elif algorithm == "LRU":
@@ -180,25 +158,17 @@ class PageReplacementSimulatorApp:
                 faults, steps = optimal_algorithm(pages, frames)
             else:
                 raise ValueError("Algorithm not implemented!")
-
             self.faults_label.config(text=f"Total Page Faults: {faults}")
             self.populate_table(steps)
             self.update_chart(faults)
-
-            # Animate step-by-step execution (optional: can be toggled or slowed down)
             self.animate_steps(steps)
-
         except Exception as e:
             messagebox.showerror("Error", str(e))
-
     def populate_table(self, steps):
-        # Clear previous rows
         for i in self.tree.get_children():
             self.tree.delete(i)
-        # Insert new simulation steps
         for i, mem in enumerate(steps):
             self.tree.insert("", "end", values=(i+1, "  ".join(map(str, mem))))
-
     def update_chart(self, faults):
         self.ax.clear()
         self.ax.bar(["Page Faults"], [faults], color="#E74C3C")
