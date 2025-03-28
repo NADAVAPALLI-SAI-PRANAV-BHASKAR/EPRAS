@@ -70,12 +70,12 @@ Convert it into a **web-based tool**
 ---
 
 ## **Contributing**  
-Contributions are welcome!  
-1. **Fork the repository**  
-2. **Create a new branch**: `git checkout -b feature-new-algorithm`  
-3. **Commit your changes**: `git commit -m "Added LFU algorithm"`  
-4. **Push to the branch**: `git push origin feature-new-algorithm`  
-5. **Submit a pull request**  
+Contributions are welcome!
+1. **Fork the repository**
+2. **Create a new branch**: `git checkout -b feature-new-algorithm`
+3. **Commit your changes**: `git commit -m "Added LFU algorithm"`
+4. **Push to the branch**: `git push origin feature-new-algorithm`
+5. **Submit a pull request**
 
 ---
 
